@@ -6,6 +6,7 @@ var gameOfLife = {
   stepInterval: 300,
   running:-1,
 
+
   createAndShowBoard: function () {
     // create <table> element
     var goltable = document.createElement("tbody");
@@ -37,7 +38,7 @@ var gameOfLife = {
       coordinates. For example: iteratorFunc(cell, x, y)
     */
   },
-  
+
   setupBoardEvents: function() {
     // each board cell has an CSS id in the format of: "x-y" 
     // where x is the x-coordinate and y the y-coordinate
@@ -87,6 +88,33 @@ var gameOfLife = {
               }
             }
           };
+          
+          var reader = new FileReader();
+          reader.onload = function(e) {
+                var text = reader.result;
+                //
+                console.log(typeof text);
+                console.log(text);
+                inputArray=text.split('!');
+                var pattern=inputArray[2];
+                console.log(pattern);
+                //
+                };
+                
+          document.getElementById('file_upload').onchange = function(e){
+              var files = e.target.files;
+
+              console.log(files)
+              var file=files[0]
+              console.log(file);
+              
+              
+              
+                
+              reader.readAsText(file);
+          
+          };
+ 
       
       document.getElementById('reset_btn').onclick = function(e){
           var probability = 0.3;
