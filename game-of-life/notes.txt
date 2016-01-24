@@ -1,0 +1,18 @@
+
+Notes and planning 
+
+Hints:
+
+:You have to make sure the buttons have an id and that there is a onclick event wired up to that id.
+
+- make each table cell clickable
+
+Needed functions:
+
+step(){}
+ - goes through the entire board and determines and updates the state for each cell 
+ -(whether it's living or dead) based on the condition of it's neighboring cells.
+ 
+ auto-play()
+ function that runs the step function every 100 milliseconds or so. 
+ You can make this time variable if you want to check the evolution of the game.

@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Game of Life - Fullstack Academy</title>
+  <link rel="stylesheet" href="libraries/bootstrap.min.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+
+<body>
+  <h2>Game of Life</h2>
+  <table id='board'></table>
+  
+  <div id='control_panel'>
+    <button id='step_btn' class='btn btn-success'>Step</button>
+    <button id='play_btn' class='btn btn-primary'>Play</button>
+    <button id='reset_btn' class='btn btn-warning'>Reset Random</button>
+    <button id='clear_btn' class='btn btn-info'>Clear</button>
+  </div>
+  
+  <br><br>
+
+<div id="button_wrap" class="autoheight">
+			
+		
+		<form method="post" id="file_upload" enctype="multipart/form-data">
+				
+
+			<input type="file" id="pattern-import" name="files" value="" size="30" class="notranslate" /> 
+			
+		</form>
+</div>	
+
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted">Built by [me] at <a href="http://www.fullstackacademy.com/">Fullstack Academy</a></p>
+    </div>
+  </footer>
+  
+  <script src="game.js"></script>
+  <script src="js/jquery.js"></script>
+</body>
+</html>
