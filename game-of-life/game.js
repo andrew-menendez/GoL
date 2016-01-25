@@ -89,7 +89,13 @@ var gameOfLife = {
             }
           };
           
+    //// Unpolaoding a file
+    
+          // this is a helper function that can parse a file
           var reader = new FileReader();
+          
+          // it needs to have file passed to it in the callback on 116
+          
           reader.onload = function(e) {
                 var text = reader.result;
                 //
@@ -98,7 +104,21 @@ var gameOfLife = {
                 inputArray=text.split('!');
                 var pattern=inputArray[2];
                 console.log(pattern);
-                //
+                
+                var pat_array=pattern.split('\n')
+                console.log(pat_array);
+                
+                for(var r in pat_array){
+                  var node = document.createElement("LI");
+                  var newP = document.createTextNode(pat_array[r]);
+                  node.appendChild(newP);     
+                  document.getElementById('pat').appendChild(node);
+                }
+                
+                //document.getElementById('pat').innerHTML=pattern;
+                
+                document.getElementById('pattern_display').removeAttribute('class','hide')
+                
                 };
                 
           document.getElementById('file_upload').onchange = function(e){

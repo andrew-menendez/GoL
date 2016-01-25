@@ -32,3 +32,16 @@ td.dead {
   margin: 10px auto;
   text-align: center;
 }
+
+#pattern_display {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.hide{
+	display:none;
+}
+#pattern_display li {
+  text-decoration: none;
+  list-style: none;
+}
