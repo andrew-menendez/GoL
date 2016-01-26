@@ -30,28 +30,7 @@ var gameOfLife = {
     this.setupBoardEvents();
   },
 
-// createAndShowBoard_v2: function (newH,newW) {
-//     // create <table> element
-//     var goltable = document.createElement("tbody");
-    
-//     // build Table HTML
-//     var tablehtml = '';
-//     for (var h=0; h<this.height; h++) {
-//       tablehtml += "<tr id='row+" + h + "'>";
-//       for (var w=0; w<this.width; w++) {
-//         tablehtml += "<td data-status='dead' id='" + w + "-" + h + "'></td>";
-//       }
-//       tablehtml += "</tr>";
-//     }
-//     goltable.innerHTML = tablehtml;
-    
-//     // add table to the #board element
-//     var board = document.getElementById('board');
-//     board.appendChild(goltable);
-    
-//     // once html elements are added to the page, attach events to them
-//     this.setupBoardEvents();
-//   },
+
   forEachCell: function (iteratorFunc) {
     /* 
       Write forEachCell here. You will have to visit
@@ -146,30 +125,31 @@ var gameOfLife = {
                 }
                 // create new birth Array:
                 newBirthArray=[];
-                pat_array=pat_array.shift();
+                
                // (var r in pat_array){
-                 for(var h=0;h<pat_array.length;h++){
+                for(var h=0;h<pat_array.length;h++){
                   var hD=h;
                   var row= pat_array[h];
                   
                     //for (var c in row){
+                    console.log('row length'+ row.length)
+                    console.log('row '+ row)
                     for(var w=0;w<row.length;w++){
                       var wD=w;
                       if(row[w]==='O'){
                         aliveStatus=true
                       } else aliveStatus=false;
                       
-                  var dimension=(hD+"-"+wD);
+                    var dimension=(wD+"-"+hD);
                   
-                  newBirthArray.push([dimension,aliveStatus]);
+                    newBirthArray.push([dimension,aliveStatus]);
                     }
                  }
+                  console.log("this is the new "+ newBirthArray);
                   console.log(newBirthArray);
                   
-                
-                
-                //document.getElementById('pat').innerHTML=pattern;
-                
+                  gameOfLife.step(newBirthArray);
+
                 document.getElementById('pattern_display').removeAttribute('class','hide')
                 
                 };
@@ -226,7 +206,7 @@ var gameOfLife = {
       };
   },
 
-  step: function () {
+  step: function (newBirthArray) {
     // Here is where you want to loop through all the cells
     // on the board and determine, based on it's neighbors,
     // whether the cell should be dead or alive in the next
@@ -284,12 +264,13 @@ var makeBirthArray=function(birthArray){
     return birthArray;
 };
     
-var birthArray=makeBirthArray();
+var birthArray= newBirthArray  || makeBirthArray();
 
 console.dir(birthArray);
 
 for(var i = 0; i < birthArray.length; i++){
   var dim = birthArray[i][0];
+  console.log(dim)
   if(birthArray[i][1]) {
     document.getElementById(dim).setAttribute('data-status','alive');
     document.getElementById(dim).className = 'alive';
