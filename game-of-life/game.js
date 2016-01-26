@@ -30,6 +30,28 @@ var gameOfLife = {
     this.setupBoardEvents();
   },
 
+createAndShowBoard_v2: function () {
+    // create <table> element
+    var goltable = document.createElement("tbody");
+    
+    // build Table HTML
+    var tablehtml = '';
+    for (var h=0; h<this.height; h++) {
+      tablehtml += "<tr id='row+" + h + "'>";
+      for (var w=0; w<this.width; w++) {
+        tablehtml += "<td data-status='dead' id='" + w + "-" + h + "'></td>";
+      }
+      tablehtml += "</tr>";
+    }
+    goltable.innerHTML = tablehtml;
+    
+    // add table to the #board element
+    var board = document.getElementById('board');
+    board.appendChild(goltable);
+    
+    // once html elements are added to the page, attach events to them
+    this.setupBoardEvents();
+  },
   forEachCell: function (iteratorFunc) {
     /* 
       Write forEachCell here. You will have to visit
@@ -89,7 +111,7 @@ var gameOfLife = {
             }
           };
           
-    //// Unpolaoding a file
+    //// Uploading a file
     
           // this is a helper function that can parse a file
           var reader = new FileReader();
@@ -107,6 +129,11 @@ var gameOfLife = {
                 
                 var pat_array=pattern.split('\n')
                 console.log(pat_array);
+                
+                var newHeight=pat_array.length
+                console.log('new height is '+ newHeight)
+                var newWidth=pat_array[0].length
+                console.log('new width is '+ newWidth)
                 
                 for(var r in pat_array){
                   var node = document.createElement("LI");
