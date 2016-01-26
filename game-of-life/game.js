@@ -2,7 +2,7 @@
 
 var gameOfLife = {
   width: 18,
-  height: 14,
+  height: 12,
   stepInterval: 300,
   running:-1,
 
@@ -30,28 +30,28 @@ var gameOfLife = {
     this.setupBoardEvents();
   },
 
-createAndShowBoard_v2: function () {
-    // create <table> element
-    var goltable = document.createElement("tbody");
+// createAndShowBoard_v2: function (newH,newW) {
+//     // create <table> element
+//     var goltable = document.createElement("tbody");
     
-    // build Table HTML
-    var tablehtml = '';
-    for (var h=0; h<this.height; h++) {
-      tablehtml += "<tr id='row+" + h + "'>";
-      for (var w=0; w<this.width; w++) {
-        tablehtml += "<td data-status='dead' id='" + w + "-" + h + "'></td>";
-      }
-      tablehtml += "</tr>";
-    }
-    goltable.innerHTML = tablehtml;
+//     // build Table HTML
+//     var tablehtml = '';
+//     for (var h=0; h<this.height; h++) {
+//       tablehtml += "<tr id='row+" + h + "'>";
+//       for (var w=0; w<this.width; w++) {
+//         tablehtml += "<td data-status='dead' id='" + w + "-" + h + "'></td>";
+//       }
+//       tablehtml += "</tr>";
+//     }
+//     goltable.innerHTML = tablehtml;
     
-    // add table to the #board element
-    var board = document.getElementById('board');
-    board.appendChild(goltable);
+//     // add table to the #board element
+//     var board = document.getElementById('board');
+//     board.appendChild(goltable);
     
-    // once html elements are added to the page, attach events to them
-    this.setupBoardEvents();
-  },
+//     // once html elements are added to the page, attach events to them
+//     this.setupBoardEvents();
+//   },
   forEachCell: function (iteratorFunc) {
     /* 
       Write forEachCell here. You will have to visit
@@ -128,11 +128,14 @@ createAndShowBoard_v2: function () {
                 console.log(pattern);
                 
                 var pat_array=pattern.split('\n')
+                
+                console.log(pat_array);
+                pat_array=pat_array.slice(1);
                 console.log(pat_array);
                 
                 var newHeight=pat_array.length
                 console.log('new height is '+ newHeight)
-                var newWidth=pat_array[0].length
+                var newWidth=pat_array[1].length
                 console.log('new width is '+ newWidth)
                 
                 for(var r in pat_array){
@@ -141,6 +144,29 @@ createAndShowBoard_v2: function () {
                   node.appendChild(newP);     
                   document.getElementById('pat').appendChild(node);
                 }
+                // create new birth Array:
+                newBirthArray=[];
+                pat_array=pat_array.shift();
+               // (var r in pat_array){
+                 for(var h=0;h<pat_array.length;h++){
+                  var hD=h;
+                  var row= pat_array[h];
+                  
+                    //for (var c in row){
+                    for(var w=0;w<row.length;w++){
+                      var wD=w;
+                      if(row[w]==='O'){
+                        aliveStatus=true
+                      } else aliveStatus=false;
+                      
+                  var dimension=(hD+"-"+wD);
+                  
+                  newBirthArray.push([dimension,aliveStatus]);
+                    }
+                 }
+                  console.log(newBirthArray);
+                  
+                
                 
                 //document.getElementById('pat').innerHTML=pattern;
                 
@@ -242,8 +268,8 @@ createAndShowBoard_v2: function () {
     };// end of willBeAlive
 
 
-var makeBirthArray=function(){
-  var birthArray=[];  
+var makeBirthArray=function(birthArray){
+  var birthArray= birthArray || [] ;
     
      for (var i=0;i<gameOfLife.width;i++){
             for(var j=0;j<gameOfLife.height;j++){
@@ -274,10 +300,8 @@ for(var i = 0; i < birthArray.length; i++){
   }
 }
 
-//console.dir(birthArray);
 
-    //console.log(willBeAlive(0,0))
-  },
+  },// end of step
 
   enableAutoPlay: function () {
     // Start Auto-Play by running the 'step' function
